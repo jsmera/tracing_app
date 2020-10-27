@@ -9,9 +9,8 @@ Settings
 --------
 
 ### Pre-instalation
-- [Postgres (Version 11.XX or higher)](https://www.digitalocean.com/community/tutorials/como-instalar-y-utilizar-postgresql-en-ubuntu-18-04-es#paso-1-instalar-postgresql)
+- [Postgres (Version 12.XX or higher)](https://www.digitalocean.com/community/tutorials/como-instalar-y-utilizar-postgresql-en-ubuntu-18-04-es#paso-1-instalar-postgresql)
 - Python (Version 3.6 or higher)
-- wkhtmltopdf
 
 ### Create DB
 First, create a role and a database, the database has to be owned by the role I create or the role must have permissions on it. Remember to save the role's password.
