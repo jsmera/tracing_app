@@ -49,6 +49,9 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'adoptions:pet-list' %}">Pet</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'adoptions:adopter-list' %}">Adopters</a>
+            </li>
             {% if request.user.is_authenticated %}
               <li class="nav-item">
                 {# URL provided by django-allauth/account/urls.py #}

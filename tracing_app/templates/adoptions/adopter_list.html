@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<ul>
+ {% for adopter in adopter_list %}
+    <li>
+      <a href="{% url 'adoptions:adopter-edit' adopter.pk %}">{{ adopter }}</a>
+    </li>
+ {% endfor %}
+</ul>
+ <a href="{% url 'adoptions:adopter-new' %}">Crear adoptante</a>
+{% endblock content %}
