@@ -39,6 +39,24 @@ class Pet(models.Model):
         return f"{self.name} - {self.age} años"
 
 
+
+class Task(models.Model):
+    STATUS = [("inprogress", "En progreso"), ("finished", "Finalizada")]
+    tipo = models.CharField(max_length=50, unique=True, verbose_name="tipo")
+    date = models.DateTimeField(default=timezone.now, verbose_name="Fecha de inicio")
+    periodica = models.BooleanField(default=False, verbose_name = "periodica")
+    file_path = models.CharField(max_length=50, verbose_name="ruta archivo")
+    status = models.CharField(
+        verbose_name="Estado de tarea",
+        choices=STATUS,
+        max_length=11,
+        default="inprogress",
+    )
+    date_end = models.DateTimeField(default=timezone.now, verbose_name="Fecha de finalizacion")
+    adopcion = models.ForeignKey("Adoption", on_delete=models.PROTECT, verbose_name="Adopcion")
+    #  def __str__(self):
+    #      return f"{self.name} - {self.age} años"
+
 class Adoption(models.Model):
     STATUS = [("inprogress", "En progreso"), ("cancelled", "Cancelada"), ("inreview", "En revision"), ("finished", "Finalizada")]
     date = models.DateTimeField(default=timezone.now, verbose_name="Fecha de adopcion")
@@ -50,3 +68,6 @@ class Adoption(models.Model):
     )
     adopter = models.ForeignKey("Adopter", on_delete=models.PROTECT, verbose_name="Adoptante")
     pet = models.ForeignKey("Pet", on_delete=models.PROTECT, verbose_name="Mascota")
+    
+
+
