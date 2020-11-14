@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import Adopter, Pet, Adoption
-from .forms import CreateAdopterForm, CreatePetForm, CreateAdoptionForm
+from .models import Adopter, Adoption
+from .forms import CreateAdopterForm,  CreateAdoptionForm
 
 
 @admin.register(Adopter)
@@ -11,12 +11,7 @@ class AdopterAdmin(admin.ModelAdmin):
     search_fields = ["first_name"]
 
 
-@admin.register(Pet)
-class PetAdmin(admin.ModelAdmin):
-    form = CreatePetForm
-    add_form = CreatePetForm
-    list_display = ["code", "name", "age"]
-    search_fields = ["name"]
+
 
 
 @admin.register(Adoption)

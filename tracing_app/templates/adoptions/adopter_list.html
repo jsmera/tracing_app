@@ -1,18 +1,75 @@
 {% extends "base.html" %}
+{% block title %}Adoptantes{% endblock %}
+{% block nav_title %}Adoptantes{% endblock %}
+
 {% block content %}
-  <ul>
-    {% for adopter in adopter_list %}
-        <div class="row">
-          <div class="column">
-            CC: <a href="{% url 'adoptions:adopter-edit' adopter.pk %}">{{ adopter.id_document }}</a> 
-            | {{adopter.first_name}} {{adopter.last_name}}
-          </div>
-          <div class="column">
-            <a class="btn btn-primary btn-sm" href="#" role="button">Ver Adopcion</a>
-         <a class="btn btn-secondary btn-sm" href="#" role="button">Ver Tareas</a>
-          </div>
-        </div> 
-    {% endfor %}
-   </ul>
-   <a class="btn btn-primary" href="{% url 'adoptions:adopter-new' %}" role="button">Crear adoptante</a>   
-{% endblock content %}
+    
+    <div class="card">
+        <div class="card-body pb-0">
+            <div class="row">
+                <div class="col-md-9 pr-4">
+                    <h4 class="card-title">Adoptantes</h4>
+                    
+                </div>
+               
+                <div class="col-md-3 pl-1 d-flex justify-content-end align-items-center">
+                    <a href="{% url 'adoptions:adopter-new' %}" class="btn btn-primary btn-round  btn-block">Crear Adoptante</a>
+                </div>
+            </div>
+            <form>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="input-group no-border">
+                        <input type="text" value="{{ first_name }}" name="nombre_adoptante" class="form-control" placeholder="Nombre adoptante">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                </div>
+                
+                <div class="col-md-3 pl-1 d-flex justify-content-center align-items-start">
+                    <div class="input-group no-border">
+                        <button class="btn mt-0 btn-round btn-block btn-primary no-border text-white font-weight-bold text-uppercase">
+                            Buscar <i class="nc-icon nc-zoom-split text-white"></i>
+                        </button>
+                    </div>
+                    <!-- <button class="btn  btn-round m-0">Buscar</button> -->
+                </div>
+                </div>
+            </form>
+            <div class="table-responsive pb-0">
+                <table class="table mb-0">
+                    <thead class=" text-primary">
+                        <tr>
+                            <th> Nombre adoptante </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for adopter in adopter_list %}
+                            <tr class="clickable-row" data-href="{% url  'adoptions:adopter-edit' adopter.pk %}">
+                                <td>{{ adopter.first_name }} </td>
+                            </tr> 
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card-footer pt-0">
+            <hr>
+            <div class="m-2 d-flex d-flex justify-content-between">
+                {% if adopter_list.has_previous %}
+                    <a class="card-link" rel="keep-params" href="?{{base_url }}&page=1">Primero</a>
+                    <a class="card-link" rel="keep-params" href="?{{base_url }}&page={{ adopter_list.previous_page_number }}">Anterior</a>
+                {% endif %}
+        
+                <span class="current">
+                    Página {{ adopter_list.number }} de {{ adopter_list.paginator.num_pages }}.
+                </span>
+        
+                {% if adopter_list.has_next %}
+                    <a class="card-link" rel="keep-params" href="?{{base_url }}&page={{ adopter_list.next_page_number }}">Siguiente</a>
+                    <a class="card-link" rel="keep-params" href="?{{base_url }}&page={{ adopter_list.paginator.num_pages }}">Último</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
