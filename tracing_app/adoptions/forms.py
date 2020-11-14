@@ -1,5 +1,6 @@
 from django.forms import ModelForm
-from .models import Adopter, Pet, Adoption
+from django import forms
+from .models import Adopter, Pet, Task, Adoption
 
 
 class CreateAdopterForm(ModelForm):
@@ -40,3 +41,15 @@ class CreateAdoptionForm(ModelForm):
             "pet",
         ]
 
+class CreateTaskForm(ModelForm):
+    class Meta:
+        model = Task
+        fields = [
+            "typeT",
+            "date",
+            "periodic", 
+            "file_path",
+            "status",
+            "date_end",
+            "adopcion",
+        ]

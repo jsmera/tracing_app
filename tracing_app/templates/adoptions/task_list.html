@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<ul>
+ {% for pet in pet_list %}
+    <li>
+      <a href="{% url 'adoptions:task-edit' task.pk %}">{{ pet }}</a>
+    </li>
+ {% endfor %}
+</ul>
+ <a href="{% url 'adoptions:task-new' adopter.pk %}">Crear tarea</a>
+{% endblock content %}

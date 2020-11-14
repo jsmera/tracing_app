@@ -1,0 +1,125 @@
+::-webkit-scrollbar-track
+{
+    background-color: transparent;
+}
+
+::-webkit-scrollbar
+{
+    width: 6px;
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-track-piece{
+    display: none;
+}
+
+::-webkit-scrollbar-thumb
+{
+    border-radius: 6px;
+    background-color: #000;
+}
+
+.sidebar .sidebar-wrapper, .off-canvas-sidebar .sidebar-wrapper {
+    overflow-x: hidden;
+}
+
+.clickable-row{
+    cursor: pointer;
+}
+
+.clickable-row:hover{
+    background-color: rgba(81,203,206, 0.3);
+    transition: 0.5s;
+}
+
+.modal-header, .modal-footer{
+    border-bottom: 0px;
+    border-top: 0px;
+}
+#id_login{
+    display: block;
+    width: 100%;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    
+}
+
+#id_password{
+    display: block;
+    width: 100%;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+#id_remember{
+    position: absolute;
+    margin-top: .3rem;
+    margin-left: -1rem;
+
+}
+
+.checkL{
+    margin-left: 10px;
+    margin-top:2px;
+}
+
+.form-signin{
+    width: 100%;
+    max-width: 330px;
+    padding: 8px;
+    margin: auto;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+}
+
+.text-center{
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    padding-top: 150px;
+    padding-bottom: 60px;
+    background-color: #F8F9FA;
+}
+
+.numberinput{
+    width: 100%;
+}
+
+.datetimeinput{
+    width: 100%;
+}
+
+.legeng-1{
+    color: #4acccd !important;
+}
+
+.legeng-2{
+    color: #fcc468 !important;
+}
+
+.legeng-3{
+    color: #ef8157 !important;
+}
+
+.legeng-4{
+    color: #9b59b6 !important;
+}
