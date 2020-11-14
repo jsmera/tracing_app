@@ -1,11 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
-<ul>
- {% for adopter in adopter_list %}
-    <li>
-      <a href="{% url 'adoptions:adopter-edit' adopter.pk %}">{{ adopter }}</a>
-    </li>
- {% endfor %}
-</ul>
- <a href="{% url 'adoptions:adopter-new' %}">Crear adoptante</a>
+  <ul>
+    {% for adopter in adopter_list %}
+        <div class="row">
+          <div class="column">
+            CC: <a href="{% url 'adoptions:adopter-edit' adopter.pk %}">{{ adopter.id_document }}</a> 
+            | {{adopter.first_name}} {{adopter.last_name}}
+          </div>
+          <div class="column">
+            <a class="btn btn-primary btn-sm" href="#" role="button">Ver Adopcion</a>
+         <a class="btn btn-secondary btn-sm" href="#" role="button">Ver Tareas</a>
+          </div>
+        </div> 
+    {% endfor %}
+   </ul>
+   <a class="btn btn-primary" href="{% url 'adoptions:adopter-new' %}" role="button">Crear adoptante</a>   
 {% endblock content %}
