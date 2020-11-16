@@ -1,11 +1,56 @@
 {% extends "base.html" %}
+{% block title %}Mascotas{% endblock %}
+{% block nav_title %}Mascotas{% endblock %}
+
 {% block content %}
-<ul>
- {% for pet in pet_list %}
-    <li>
-      <a href="{% url 'pets:pets-edit' pet.pk %}">{{ pet }}</a>
-    </li>
- {% endfor %}
-</ul>
- <a href="{% url 'pets:pets-new' %}">Crear mascota</a>
-{% endblock content %}
+    
+    <div class="card">
+        <div class="card-body pb-0">
+            <div class="row">
+                <div class="col-md-9 pr-4">
+                    <h4 class="card-title">Mascotas</h4>
+                    
+                </div>
+               
+                <div class="col-md-3 pl-1 d-flex justify-content-end align-items-center">
+                    <a href="{% url 'pets:pets-new' %}" class="btn btn-primary btn-round  btn-block">Crear Adoptante</a>
+                </div>
+            </div>
+       
+            <div class="table-responsive pb-0">
+                <table class="table mb-0">
+                    <thead class=" text-primary">
+                        <tr>
+                            <th> Nombre Mascota </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for pet in pet_list %}
+                            <tr class="clickable-row" data-href="{% url  'pets:pets-edit' pet.pk %}">
+                                <td>{{ pet.name }} </td>
+                            </tr> 
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card-footer pt-0">
+            <hr>
+            <div class="m-2 d-flex d-flex justify-content-between">
+                {% if pet_list.has_previous %}
+                    <a class="card-link" rel="keep-params" href="?{{base_url }}&page=1">Primero</a>
+                    <a class="card-link" rel="keep-params" href="?{{base_url }}&page={{ pet_list.previous_page_number }}">Anterior</a>
+                {% endif %}
+        
+                <span class="current">
+                    Página {{ pet_list.number }} de {{ pet_list.paginator.num_pages }}.
+                </span>
+        
+                {% if pet_list.has_next %}
+                    <a class="card-link" rel="keep-params" href="?{{base_url }}&page={{ pet_list.next_page_number }}">Siguiente</a>
+                    <a class="card-link" rel="keep-params" href="?{{base_url }}&page={{ pet_list.paginator.num_pages }}">Último</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

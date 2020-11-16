@@ -79,6 +79,7 @@ LOCAL_APPS = [
     "tracing_app.adoptions.apps.AdoptionConfig",
     "tracing_app.pets.apps.PetsConfig",
     "tracing_app.adopters.apps.AdoptersConfig",
+    "tracing_app.tasks.apps.TasksConfig",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps

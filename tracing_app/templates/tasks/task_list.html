@@ -1,6 +1,6 @@
 {% extends "base.html" %}
-{% block title %}Adoptantes{% endblock %}
-{% block nav_title %}Adoptantes{% endblock %}
+{% block title %}Tareas{% endblock %}
+{% block nav_title %}Tareas{% endblock %}
 
 {% block content %}
     
@@ -8,26 +8,26 @@
         <div class="card-body pb-0">
             <div class="row">
                 <div class="col-md-9 pr-4">
-                    <h4 class="card-title">Adoptantes</h4>
+                    <h4 class="card-title">Tareas</h4>
                     
                 </div>
                
                 <div class="col-md-3 pl-1 d-flex justify-content-end align-items-center">
-                    <a href="{% url 'adopters:adopter-new' %}" class="btn btn-primary btn-round  btn-block">Crear Adoptante</a>
+                    <a href="{% url 'tasks:task-new' %}" class="btn btn-primary btn-round  btn-block">Crear Tarea</a>
                 </div>
             </div>
-       
+        
             <div class="table-responsive pb-0">
                 <table class="table mb-0">
                     <thead class=" text-primary">
                         <tr>
-                            <th> Nombre adoptante </th>
+                            <th> Estado Tarea </th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for adopter in adopter_list %}
-                            <tr class="clickable-row" data-href="{% url  'adopters:adopter-edit' adopter.pk %}">
-                                <td>{{ adopter.first_name }} </td>
+                        {% for task in task_list %}
+                            <tr class="clickable-row" data-href="{% url  'tasks:task-edit' task.pk %}">
+                                <td>{{ task.status }} </td>
                             </tr> 
                         {% endfor %}
                     </tbody>
@@ -37,18 +37,18 @@
         <div class="card-footer pt-0">
             <hr>
             <div class="m-2 d-flex d-flex justify-content-between">
-                {% if adopter_list.has_previous %}
+                {% if task_list.has_previous %}
                     <a class="card-link" rel="keep-params" href="?{{base_url }}&page=1">Primero</a>
-                    <a class="card-link" rel="keep-params" href="?{{base_url }}&page={{ adopter_list.previous_page_number }}">Anterior</a>
+                    <a class="card-link" rel="keep-params" href="?{{base_url }}&page={{ task_list.previous_page_number }}">Anterior</a>
                 {% endif %}
         
                 <span class="current">
-                    Página {{ adopter_list.number }} de {{ adopter_list.paginator.num_pages }}.
+                    Página {{ task_list.number }} de {{ task_list.paginator.num_pages }}.
                 </span>
         
-                {% if adopter_list.has_next %}
-                    <a class="card-link" rel="keep-params" href="?{{base_url }}&page={{ adopter_list.next_page_number }}">Siguiente</a>
-                    <a class="card-link" rel="keep-params" href="?{{base_url }}&page={{ adopter_list.paginator.num_pages }}">Último</a>
+                {% if task_list.has_next %}
+                    <a class="card-link" rel="keep-params" href="?{{base_url }}&page={{ task_list.next_page_number }}">Siguiente</a>
+                    <a class="card-link" rel="keep-params" href="?{{base_url }}&page={{ task_list.paginator.num_pages }}">Último</a>
                 {% endif %}
             </div>
         </div>

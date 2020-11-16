@@ -61,6 +61,13 @@ Coded by www.creative-tim.com
                   <p>Home</p>
                 </a>
               </li>
+            </li>
+            <li >
+              <a href="{% url 'adoptions:adoption-list' %}">
+                <i class="nc-icon nc-badge"></i>
+                <p>Adopcion</p>
+              </a>
+            </li>
             <li >
               <a href="{% url 'pets:pets-list' %}">
                 <i class="nc-icon nc-favourite-28"></i>
@@ -74,12 +81,11 @@ Coded by www.creative-tim.com
               </a>
             </li>
             <li >
-              <a href="{% url 'adoptions:task-list' %}">
+              <a href="{% url 'tasks:task-list' %}">
                 <i class="nc-icon nc-bullet-list-67"></i>
                 <p>Tareas</p>
               </a>
             </li>
-
           </ul>
         </div>
       </div>
