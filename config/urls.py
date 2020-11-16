@@ -17,6 +17,7 @@ urlpatterns = [
     path("accounts/", include("allauth.urls")),
     path("", include("tracing_app.adoptions.urls", namespace="adoptions")),
     path("", include("tracing_app.pets.urls", namespace="pets")),
+    path("", include("tracing_app.adopters.urls", namespace="adopters")),
     # Your stuff: custom urls includes go here
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

@@ -13,7 +13,7 @@
                 </div>
                
                 <div class="col-md-3 pl-1 d-flex justify-content-end align-items-center">
-                    <a href="{% url 'adoptions:adopter-new' %}" class="btn btn-primary btn-round  btn-block">Crear Adoptante</a>
+                    <a href="{% url 'adopters:adopter-new' %}" class="btn btn-primary btn-round  btn-block">Crear Adoptante</a>
                 </div>
             </div>
             <form>
@@ -45,7 +45,7 @@
                     </thead>
                     <tbody>
                         {% for adopter in adopter_list %}
-                            <tr class="clickable-row" data-href="{% url  'adoptions:adopter-edit' adopter.pk %}">
+                            <tr class="clickable-row" data-href="{% url  'adopters:adopter-edit' adopter.pk %}">
                                 <td>{{ adopter.first_name }} </td>
                             </tr> 
                         {% endfor %}
