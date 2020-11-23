@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 from django import forms
-from .models import Task
+from .models import Task, Configuration
 from crispy_forms.helper import FormHelper
 from django.core.validators import FileExtensionValidator
 from crispy_forms.layout import Submit
@@ -15,12 +15,22 @@ class BaseCrispy(ModelForm):
 
 
 class CreateTaskForm(BaseCrispy):
+    type = forms.ChoiceField(
+        label="Tipo",
+        choices=[
+            ("multimedia", "Registro multimedia"),
+            ("text", "Registro texto"),
+        ],
+    )
+
     class Meta:
         model = Task
         fields = [
             "type",
             "status",
             "adopcion",
+            "date_start",
+            "date_end",
         ]
         widgets = {
             "adopcion": forms.HiddenInput(),
@@ -40,6 +50,8 @@ class CreateReminderForm(BaseCrispy):
             "status",
             "text",
             "adopcion",
+            "date_start",
+            "date_end",
         ]
         widgets = {
             "adopcion": forms.HiddenInput(),
@@ -94,3 +106,56 @@ class CompleteTextTask(BaseCrispy):
         widgets = {
             "status": forms.HiddenInput(),
         }
+
+
+class ConfigurationTaskForm(BaseCrispy):
+    type = forms.ChoiceField(
+        label="Tipo",
+        choices=[
+            ("multimedia", "Registro multimedia"),
+            ("text", "Registro texto"),
+        ],
+    )
+
+    class Meta:
+        model = Configuration
+        fields = [
+            "type",
+            "unit",
+            "delta_difference",
+        ]
+
+
+class ConfigurationReminderForm(BaseCrispy):
+    type = forms.ChoiceField(
+        choices=[("reminder", "Recordatorio")], widget=forms.HiddenInput()
+    )
+    text = forms.CharField(label="Recordatorio", required=True)
+
+    class Meta:
+        model = Configuration
+        fields = [
+            "type",
+            "text",
+            "unit",
+            "delta_difference",
+        ]
+
+
+class EditConfigurationTaskForm(BaseCrispy):
+    class Meta:
+        model = Configuration
+        fields = [
+            "unit",
+            "delta_difference",
+        ]
+
+
+class EditConfigurationReminderForm(BaseCrispy):
+    class Meta:
+        model = Configuration
+        fields = [
+            "text",
+            "unit",
+            "delta_difference",
+        ]

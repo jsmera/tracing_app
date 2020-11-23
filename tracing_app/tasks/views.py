@@ -5,17 +5,21 @@ from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView
 from django.urls import reverse
 from tracing_app.adoptions.models import Adoption
-from .models import Task
+from .models import Task, Configuration
 from .forms import (
     CreateTaskForm,
     CompleteMultimediaTask,
     CompleteTextTask,
     EditTaskForm,
     CreateReminderForm,
+    ConfigurationTaskForm,
+    ConfigurationReminderForm,
+    EditConfigurationTaskForm,
+    EditConfigurationReminderForm,
 )
 from django.views.generic.base import TemplateView
 from django.http import Http404
-from .tasks import send_notification
+from .tasks import send_notification, create_notifications
 
 
 class TaskCreateView(CreateView):
@@ -33,6 +37,11 @@ class TaskCreateView(CreateView):
             data.appendlist("adopcion", self.adoption)
             kwargs["data"] = data
         return kwargs
+
+    def form_valid(self, form):
+        url = super(TaskCreateView, self).form_valid(form)
+        create_notifications(self.object.id)
+        return url
 
     def get_success_url(self):
         return reverse("adoptions:adoption-edit", args=(self.adoption.id,))
@@ -54,7 +63,7 @@ class NotifyView(View):
     def post(self, request, *args, **kwargs):
         pid = kwargs["task"]
         task = get_object_or_404(Task, id=pid)
-        send_notification(task)
+        send_notification(task.id)
 
         return redirect(reverse("tasks:task-edit", args=(task.adopcion.id, task.id)))
 
@@ -101,3 +110,46 @@ class CompleteTaskView(UpdateView):
 
 class DoneTaskView(TemplateView):
     template_name = "pages/done.html"
+
+
+class ConfigurationsListView(ListView):
+    model = Configuration
+
+
+class ConfigurationTaskCreateView(CreateView):
+    model = Configuration
+    form_class = ConfigurationTaskForm
+
+    def get_success_url(self):
+        return reverse("tasks:config-list")
+
+
+class ConfigurationReminderCreateView(ConfigurationTaskCreateView):
+    form_class = ConfigurationReminderForm
+
+    def get_form_kwargs(self):
+        kwargs = super(ConfigurationReminderCreateView, self).get_form_kwargs()
+        if "data" in kwargs:
+            data = kwargs["data"].copy()
+            data.appendlist("type", "reminder")
+            kwargs["data"] = data
+        return kwargs
+
+    def get_success_url(self):
+        return reverse("tasks:config-list")
+
+
+class ConfigurationsUpdateView(UpdateView):
+    model = Configuration
+
+    def get_success_url(self):
+        return reverse("tasks:config-list")
+
+    def get_form_class(self):
+        task = self.object
+        if task.type in ["multimedia", "text"]:
+            return EditConfigurationTaskForm
+        elif task.type == "reminder":
+            return EditConfigurationReminderForm
+        else:
+            return super(ConfigurationsUpdateView, self).get_form_class()

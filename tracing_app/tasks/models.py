@@ -49,3 +49,39 @@ class Task(models.Model):
 
     def __str__(self):
         return f"Tarea de tipo: {self.get_type_display()}. Estado: {self.get_status_display()}"
+
+
+class Configuration(models.Model):
+    TYPE = [
+        ("multimedia", "Registro multimedia"),
+        ("text", "Registro texto"),
+        ("reminder", "Recordatorio"),
+    ]
+    UNIT = [("days", "Dias"), ("weeks", "Semanas"), ("months", "Meses")]
+    type = models.CharField(
+        verbose_name="Tipo de tarea",
+        choices=TYPE,
+        max_length=11,
+        default="multimedia",
+    )
+    unit = models.CharField(
+        verbose_name="Unidad de tiempo",
+        choices=UNIT,
+        max_length=7,
+        default="weeks",
+    )
+    delta_difference = models.IntegerField(
+        verbose_name="Tiempo",
+        help_text=(
+            "Ejemplo: Tarea a realizar 1 semana despues de la fecha de adopción."
+        ),
+        default=1,
+    )
+    text = models.TextField(blank=True, max_length=500)
+
+    def __str__(self):
+        complete = f"{self.delta_difference} {self.get_unit_display().lower()} despues de la fecha de adopción"
+        if self.type == "reminder":
+            return f"Recordatorio {complete}"
+        else:
+            return f"Tarea de tipo {self.get_type_display().lower()} {complete}"

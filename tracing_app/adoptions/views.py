@@ -3,6 +3,7 @@ from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView
 from django.urls import reverse
 from tracing_app.tasks.models import Task
+from tracing_app.tasks.tasks import create_tasks
 from .models import Adoption
 from .forms import CreateAdoptionForm, EditAdoptionForm
 
@@ -21,6 +22,11 @@ class AdoptionCreateView(CreateView):
 
     def get_success_url(self):
         return reverse("adoptions:adoption-list")
+
+    def form_valid(self, form):
+        url = super(AdoptionCreateView, self).form_valid(form)
+        create_tasks.apply((self.object.id,))
+        return url
 
 
 class AdoptionUpdateView(UpdateView):
