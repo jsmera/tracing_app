@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block title %}Crear Configuración{% endblock %}
+{% block nav_title %}Crear Configuración{% endblock %}
+{% block content %}
+
+<div class="row">
+    <div class="col-md-1"></div>
+  <div class="col-md-10">
+    <div class="card card-user">
+        <br/>
+        <div class="row">
+            <div class="col-md-4 pr-1">
+            </div>
+            
+            <div class="col-md-4 pr-1" style="text-align:center" >
+            <h5 class="card-title" style="margin-top: 20px;">Configuración</h5>
+            </div>
+            <div class="col-md-4 pr-1">
+            </div>
+        </div>
+        <div class="card-body">
+            {% crispy form %}
+        </div>
+    </div>
+  </div>
+<div class="col-md-1"></div>
+
+
+
+{% endblock %}

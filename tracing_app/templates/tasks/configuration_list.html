@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}Configuraciones de tareas{% endblock %}
+{% block nav_title %}Configuraciones de tareas{% endblock %}
+
+{% block content %}
+    
+    <div class="card">
+        <div class="card-body pb-0">
+            <div class="row">
+                <div class="col-md-6 pr-4">
+                    <h4 class="card-title">Configuraciones</h4>
+                </div>
+               
+                <div class="col-md-3 pl-1 d-flex justify-content-end align-items-center">
+                    <a href="{% url 'tasks:config-new' %}" class="btn btn-primary btn-round  btn-block">Crear configuración tarea</a>
+                </div>
+                <div class="col-md-3 pl-1 d-flex justify-content-end align-items-center">
+                  <a href="{% url 'tasks:remin-new' %}" class="btn btn-primary btn-round  btn-block">Crear configuración recordatorio</a>
+              </div>
+            </div>
+        
+            <div class="table-responsive pb-0">
+                <table class="table mb-0">
+                    <thead class=" text-primary">
+                        <tr>
+                            <th> configuración </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for config in object_list %}
+                            <tr class="clickable-row" data-href="{% url  'tasks:config-edit' config.pk %}">
+                                <td>{{ config }} </td>
+                            </tr> 
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card-footer pt-0">
+            <hr>
+            <div class="m-2 d-flex d-flex justify-content-between">
+                {% if object_list.has_previous %}
+                    <a class="card-link" rel="keep-params" href="?{{base_url }}&page=1">Primero</a>
+                    <a class="card-link" rel="keep-params" href="?{{base_url }}&page={{ object_list.previous_page_number }}">Anterior</a>
+                {% endif %}
+        
+                <span class="current">
+                    Página {{ object_list.number }} de {{ object_list.paginator.num_pages }}.
+                </span>
+        
+                {% if object_list.has_next %}
+                    <a class="card-link" rel="keep-params" href="?{{base_url }}&page={{ object_list.next_page_number }}">Siguiente</a>
+                    <a class="card-link" rel="keep-params" href="?{{base_url }}&page={{ object_list.paginator.num_pages }}">Último</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
