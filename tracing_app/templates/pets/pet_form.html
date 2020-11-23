@@ -4,8 +4,6 @@
 {% block title %}Crear Mascota{% endblock %}
 {% block nav_title %}Crear Mascota{% endblock %}
 {% block content %}
-{% load crispy_forms_tags %}
-{% load static %}
 
 <div class="row">
     <div class="col-md-1"></div>
@@ -23,85 +21,7 @@
             </div>
         </div>
         <div class="card-body">
-            <form method="post">
-                {% csrf_token %}
-                 
-                <div class="row">
-                    <div class="col-md-3 pr-1">
-                    </div>
-                    <div class="col-md-6 pr-1">
-                    <div class="form-group" >
-                        {{ form.code|as_crispy_field }}
-                    </div>
-                    </div>
-                    <div class="col-md-3 pr-1">
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-3 pr-1">
-                    </div>
-                    <div class="col-md-6 pr-1">
-                    <div class="form-group" >
-                        {{ form.name|as_crispy_field }}
-                    </div>
-                    </div>
-                    <div class="col-md-3 pr-1">
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-3 pr-1">
-                    </div>
-                    <div class="col-md-6 pr-1">
-                    <div class="form-group" >
-                        {{ form.age|as_crispy_field }}
-                    </div>
-                    </div>
-                    <div class="col-md-3 pr-1">
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-3 pr-1">
-                    </div>
-                    <div class="col-md-6 pr-1">
-                    <div class="form-group" >
-                        {{ form.disability|as_crispy_field }}
-                    </div>
-                    </div>
-                    <div class="col-md-3 pr-1">
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-3 pr-1">
-                    </div>
-                    <div class="col-md-6 pr-1">
-                    <div class="form-group" >
-                        {{ form.comments|as_crispy_field }}
-                    </div>
-                    </div>
-                    <div class="col-md-3 pr-1">
-                    </div>
-                </div>
-
-                
-                <div class="row">
-                    <div class="col-md-4 pr-1">
-                    </div>
-                    {% if object %}
-                    <div class="col-md-2 pr-1">
-                        <button type="button" data-toggle="modal" data-target="#exampleModalCenter" class="btn btn btn-danger btn-round">Eliminar</button>
-                    </div>
-                    {% endif %}
-                    <div class="col-md-2 pr-1">
-                        <button type="submit" class="btn btn-primary btn-round">Guardar</button>
-                    </div>
-                    <div class="col-md-3 pr-1">
-                    </div>
-                </div>
-            </form>
+            {% crispy form %}
         </div>
     </div>
   </div>

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Adoption
-from .forms import  CreateAdoptionForm
+from .forms import CreateAdoptionForm
 
 
 @admin.register(Adoption)

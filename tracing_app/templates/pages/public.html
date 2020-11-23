@@ -1,0 +1,29 @@
+{% extends "base_white.html" %}
+{% block title %}Tarea!{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="header">
+          <h4 class="title">Hola {{ object.adopcion.adopter.first_name }}</h4>
+          <p class="">Expiración: {{ object.date_end }}</p>
+        </div>
+        {% if object.status == "inprogress" %}
+          <div class="content">
+            <p>Queremos saber un poco más de tu hijo peludo y tu. Completa esta tarea para que el proceso de seguimiento sea satisfactorio.</p>
+            {% crispy form %}
+          </div>
+        {% elif object.status == "finished" %}
+          <p>Esta tarea ya fue completada</p>
+        {% elif object.status == "expired" %}
+          <p>Esta tarea ya expiró</p>
+        {% elif object.status == "canceled" %}
+          <p>Esta tarea fue cancelada</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

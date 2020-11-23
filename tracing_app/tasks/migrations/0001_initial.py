@@ -10,21 +10,69 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('adoptions', '0001_initial'),
+        ("adoptions", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Task',
+            name="Task",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('typeT', models.CharField(max_length=50, unique=True, verbose_name='tipo')),
-                ('date', models.DateTimeField(default=django.utils.timezone.now, verbose_name='Fecha de inicio')),
-                ('periodic', models.BooleanField(default=False, verbose_name='periodica')),
-                ('file_path', models.CharField(max_length=50, verbose_name='ruta archivo')),
-                ('status', models.CharField(choices=[('inprogress', 'En progreso'), ('finished', 'Finalizada')], default='inprogress', max_length=11, verbose_name='Estado de tarea')),
-                ('date_end', models.DateTimeField(default=django.utils.timezone.now, verbose_name='Fecha de finalizacion')),
-                ('adopcion', models.ForeignKey(default=1, on_delete=django.db.models.deletion.PROTECT, to='adoptions.Adoption', verbose_name='Adopcion')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "typeT",
+                    models.CharField(max_length=50, unique=True, verbose_name="tipo"),
+                ),
+                (
+                    "date",
+                    models.DateTimeField(
+                        default=django.utils.timezone.now,
+                        verbose_name="Fecha de inicio",
+                    ),
+                ),
+                (
+                    "periodic",
+                    models.BooleanField(default=False, verbose_name="periodica"),
+                ),
+                (
+                    "file_path",
+                    models.CharField(max_length=50, verbose_name="ruta archivo"),
+                ),
+                (
+                    "status",
+                    models.CharField(
+                        choices=[
+                            ("inprogress", "En progreso"),
+                            ("finished", "Finalizada"),
+                        ],
+                        default="inprogress",
+                        max_length=11,
+                        verbose_name="Estado de tarea",
+                    ),
+                ),
+                (
+                    "date_end",
+                    models.DateTimeField(
+                        default=django.utils.timezone.now,
+                        verbose_name="Fecha de finalizacion",
+                    ),
+                ),
+                (
+                    "adopcion",
+                    models.ForeignKey(
+                        default=1,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to="adoptions.Adoption",
+                        verbose_name="Adopcion",
+                    ),
+                ),
             ],
         ),
     ]

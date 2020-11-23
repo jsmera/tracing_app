@@ -7,19 +7,32 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Pet',
+            name="Pet",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('code', models.CharField(max_length=50, unique=True, verbose_name='Codigo')),
-                ('name', models.CharField(max_length=30, verbose_name='Nombre')),
-                ('age', models.PositiveSmallIntegerField(verbose_name='Edad')),
-                ('disability', models.BooleanField(default=False, verbose_name='Discapacidad')),
-                ('comments', models.TextField(verbose_name='Comentarios')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "code",
+                    models.CharField(max_length=50, unique=True, verbose_name="Codigo"),
+                ),
+                ("name", models.CharField(max_length=30, verbose_name="Nombre")),
+                ("age", models.PositiveSmallIntegerField(verbose_name="Edad")),
+                (
+                    "disability",
+                    models.BooleanField(default=False, verbose_name="Discapacidad"),
+                ),
+                ("comments", models.TextField(verbose_name="Comentarios")),
             ],
         ),
     ]

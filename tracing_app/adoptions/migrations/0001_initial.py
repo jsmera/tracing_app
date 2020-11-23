@@ -10,19 +10,62 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('adopters', '0001_initial'),
-        ('pets', '0001_initial'),
+        ("adopters", "0001_initial"),
+        ("pets", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Adoption',
+            name="Adoption",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('date', models.DateTimeField(default=django.utils.timezone.now, verbose_name='Fecha de adopcion')),
-                ('status', models.CharField(choices=[('inprogress', 'En progreso'), ('cancelled', 'Cancelada'), ('inreview', 'En revision'), ('finished', 'Finalizada')], default='inprogress', max_length=11, verbose_name='Estado de adopcion')),
-                ('adopter', models.ForeignKey(default=1, on_delete=django.db.models.deletion.PROTECT, to='adopters.Adopter', verbose_name='Adoptante')),
-                ('pet', models.ForeignKey(default=1, on_delete=django.db.models.deletion.PROTECT, to='pets.Pet', verbose_name='Mascota')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "date",
+                    models.DateTimeField(
+                        default=django.utils.timezone.now,
+                        verbose_name="Fecha de adopcion",
+                    ),
+                ),
+                (
+                    "status",
+                    models.CharField(
+                        choices=[
+                            ("inprogress", "En progreso"),
+                            ("cancelled", "Cancelada"),
+                            ("inreview", "En revision"),
+                            ("finished", "Finalizada"),
+                        ],
+                        default="inprogress",
+                        max_length=11,
+                        verbose_name="Estado de adopcion",
+                    ),
+                ),
+                (
+                    "adopter",
+                    models.ForeignKey(
+                        default=1,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to="adopters.Adopter",
+                        verbose_name="Adoptante",
+                    ),
+                ),
+                (
+                    "pet",
+                    models.ForeignKey(
+                        default=1,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to="pets.Pet",
+                        verbose_name="Mascota",
+                    ),
+                ),
             ],
         ),
     ]

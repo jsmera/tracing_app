@@ -4,8 +4,44 @@
 {% block title %}Crear Tarea{% endblock %}
 {% block nav_title %}Crear Tarea{% endblock %}
 {% block content %}
-{% load crispy_forms_tags %}
-{% load static %}
+
+{% if object %}
+<div class="card">
+  <div class="card-body pb-0">
+    <div class="row">
+      <div class="col-md-9 pr-4">
+        <h4 class="card-title">Registro</h4>
+      </div>
+      <div class="col-md-3 pl-1 d-flex justify-content-end align-items-center">
+        <form action="{% url 'tasks:task-notify' object.id %}" method="POST">
+          {% csrf_token %}
+          <button class="btn btn-primary btn-round btn-block">Enviar notificacion</button>
+        </form>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col text-center">
+        {% if object.type == "multimedia" %}
+          {% if object.file_path %}
+            {% if "jpg" in object.file_path.name or "png" in object.file_path.name or "jpeg" in object.file_path.name %}
+            <img src="{{ object.file_path.url }}" alt="">
+            {% else %}
+              <video width="320" height="240" controls>
+                <source src="{{ object.file_path.url }}">
+              </video>
+            {% endif %}
+    
+          {% else %}
+            <p>Aun no hay registro de la tarea.</p>
+          {% endif %}
+        {% else %}
+          <p>{{ object.text }}</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
 
 <div class="row">
     <div class="col-md-1"></div>
@@ -23,105 +59,7 @@
             </div>
         </div>
         <div class="card-body">
-            <form method="post">
-                {% csrf_token %}
-                 
-                <div class="row">
-                    <div class="col-md-3 pr-1">
-                    </div>
-                    <div class="col-md-6 pr-1">
-                    <div class="form-group" >
-                        {{ form.typeT|as_crispy_field }}
-                    </div>
-                    </div>
-                    <div class="col-md-3 pr-1">
-                    </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-md-3 pr-1">
-                  </div>
-                  <div class="col-md-6 pr-1">
-                  <div class="form-group" >
-                      {{ form.date|as_crispy_field }}
-                  </div>
-                  </div>
-                  <div class="col-md-3 pr-1">
-                  </div>
-              </div>
-
-              <div class="row">
-                  <div class="col-md-3 pr-1">
-                  </div>
-                  <div class="col-md-6 pr-1">
-                  <div class="form-group" >
-                      {{ form.periodic|as_crispy_field }}
-                  </div>
-                  </div>
-                  <div class="col-md-3 pr-1">
-                  </div>
-              </div>
-
-              <div class="row">
-                  <div class="col-md-3 pr-1">
-                  </div>
-                  <div class="col-md-6 pr-1">
-                  <div class="form-group" >
-                      {{ form.file_path|as_crispy_field }}
-                  </div>
-                  </div>
-                  <div class="col-md-3 pr-1">
-                  </div>
-              </div>
-
-              <div class="row">
-                <div class="col-md-3 pr-1">
-                </div>
-                <div class="col-md-6 pr-1">
-                <div class="form-group" >
-                    {{ form.status|as_crispy_field }}
-                </div>
-                </div>
-                <div class="col-md-3 pr-1">
-                </div>
-            </div>
-            <div class="row">
-              <div class="col-md-3 pr-1">
-              </div>
-              <div class="col-md-6 pr-1">
-              <div class="form-group" >
-                  {{ form.date_end|as_crispy_field }}
-              </div>
-              </div>
-              <div class="col-md-3 pr-1">
-              </div>
-          </div>
-            <div class="row">
-              <div class="col-md-3 pr-1">
-              </div>
-              <div class="col-md-6 pr-1">
-              <div class="form-group" >
-                  {{ form.adopcion|as_crispy_field }}
-              </div>
-              </div>
-              <div class="col-md-3 pr-1">
-              </div>
-          </div>
-                <div class="row">
-                    <div class="col-md-4 pr-1">
-                    </div>
-                    {% if object %}
-                    <div class="col-md-2 pr-1">
-                        <button type="button" data-toggle="modal" data-target="#exampleModalCenter" class="btn btn btn-danger btn-round">Eliminar</button>
-                    </div>
-                    {% endif %}
-                    <div class="col-md-2 pr-1">
-                        <button type="submit" class="btn btn-primary btn-round">Guardar</button>
-                    </div>
-                    <div class="col-md-3 pr-1">
-                    </div>
-                </div>
-            </form>
+            {% crispy form %}
         </div>
     </div>
   </div>
