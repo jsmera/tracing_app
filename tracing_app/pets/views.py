@@ -4,9 +4,10 @@ from django.views.generic.edit import CreateView, UpdateView
 from django.urls import reverse
 from .models import Pet
 from .forms import CreatePetForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class PetListView(ListView):
+class PetListView(LoginRequiredMixin, ListView):
     model = Pet
 
     def get_context_data(self, **kwargs):
@@ -15,7 +16,7 @@ class PetListView(ListView):
         return context
 
 
-class PetCreateView(CreateView):
+class PetCreateView(LoginRequiredMixin, CreateView):
     model = Pet
     form_class = CreatePetForm
 
@@ -23,7 +24,7 @@ class PetCreateView(CreateView):
         return reverse("pets:pets-list")
 
 
-class PetUpdateView(UpdateView):
+class PetUpdateView(LoginRequiredMixin, UpdateView):
     model = Pet
     form_class = CreatePetForm
 

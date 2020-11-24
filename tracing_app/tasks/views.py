@@ -20,9 +20,10 @@ from .forms import (
 from django.views.generic.base import TemplateView
 from django.http import Http404
 from .tasks import send_notification, create_notifications
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class TaskCreateView(CreateView):
+class TaskCreateView(LoginRequiredMixin, CreateView):
     model = Task
     form_class = CreateTaskForm
 
@@ -59,7 +60,7 @@ class ReminderCreateView(TaskCreateView):
         return kwargs
 
 
-class NotifyView(View):
+class NotifyView(LoginRequiredMixin, View):
     def post(self, request, *args, **kwargs):
         pid = kwargs["task"]
         task = get_object_or_404(Task, id=pid)
@@ -68,7 +69,7 @@ class NotifyView(View):
         return redirect(reverse("tasks:task-edit", args=(task.adopcion.id, task.id)))
 
 
-class TaskUpdateView(UpdateView):
+class TaskUpdateView(LoginRequiredMixin, UpdateView):
     model = Task
     form_class = EditTaskForm
 
@@ -112,11 +113,11 @@ class DoneTaskView(TemplateView):
     template_name = "pages/done.html"
 
 
-class ConfigurationsListView(ListView):
+class ConfigurationsListView(LoginRequiredMixin, ListView):
     model = Configuration
 
 
-class ConfigurationTaskCreateView(CreateView):
+class ConfigurationTaskCreateView(LoginRequiredMixin, CreateView):
     model = Configuration
     form_class = ConfigurationTaskForm
 
@@ -139,7 +140,7 @@ class ConfigurationReminderCreateView(ConfigurationTaskCreateView):
         return reverse("tasks:config-list")
 
 
-class ConfigurationsUpdateView(UpdateView):
+class ConfigurationsUpdateView(LoginRequiredMixin, UpdateView):
     model = Configuration
 
     def get_success_url(self):

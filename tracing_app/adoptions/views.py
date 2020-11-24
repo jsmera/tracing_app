@@ -6,9 +6,10 @@ from tracing_app.tasks.models import Task
 from tracing_app.tasks.tasks import create_tasks
 from .models import Adoption
 from .forms import CreateAdoptionForm, EditAdoptionForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class AdoptionListView(ListView):
+class AdoptionListView(LoginRequiredMixin, ListView):
     model = Adoption
 
     def get_context_data(self, **kwargs):
@@ -16,7 +17,7 @@ class AdoptionListView(ListView):
         return context
 
 
-class AdoptionCreateView(CreateView):
+class AdoptionCreateView(LoginRequiredMixin, CreateView):
     model = Adoption
     form_class = CreateAdoptionForm
 
@@ -29,7 +30,7 @@ class AdoptionCreateView(CreateView):
         return url
 
 
-class AdoptionUpdateView(UpdateView):
+class AdoptionUpdateView(LoginRequiredMixin, UpdateView):
     model = Adoption
     form_class = EditAdoptionForm
 
