@@ -183,7 +183,9 @@ EMAIL_PORT = env("EMAIL_PORT")
 EMAIL_USE_TLS = env("EMAIL_USE_TLS")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 
+import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 import django_heroku
 
 django_heroku.settings(locals())
