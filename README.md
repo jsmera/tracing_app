@@ -1,4 +1,4 @@
-NUTRIPEDIA
+Tracing app
 ==========
 
 Behold My Awesome Project!
@@ -82,8 +82,8 @@ ENVIROMENT
 ```
 DJANGO_SETTINGS_MODULE=config.settings.production
 EMAIL_HOST=smtp.gmail.com
-EMAIL_HOST_PASSWORD=nutripedia1999
-EMAIL_HOST_USER=barberprocesos@gmail.com
+EMAIL_HOST_PASSWORD=<contraseña>
+EMAIL_HOST_USER=<email>
 EMAIL_PORT=587
 EMAIL_USE_TLS=True
 WKHTMLTOPDF_CMD=<wkhtmltopdf's path>
