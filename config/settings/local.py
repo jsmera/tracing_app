@@ -66,3 +66,9 @@ CELERY_TASK_EAGER_PROPAGATES = True
 EMAIL_HOST = "localhost"
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-port
 EMAIL_PORT = 1025
+
+EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+EMAIL_HOST = env("EMAIL_HOST")
+EMAIL_PORT = env("EMAIL_PORT")
+EMAIL_USE_TLS = env("EMAIL_USE_TLS")
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
